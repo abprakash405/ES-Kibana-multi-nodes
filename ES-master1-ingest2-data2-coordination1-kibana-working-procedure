@@ -19,17 +19,17 @@ vi docker-compose.yml
 
 version: '3.7'
 services:
-  elasticsearch1:
+  elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.4.2
-    container_name: elasticsearch1
+    container_name: elasticsearch
     environment:
-      - node.name=elasticsearch1
+      - node.name=elasticsearch
       - node.master=true
       - node.data=false
       - node.ingest=false
       - cluster.name=docker-cluster
-      - cluster.initial_master_nodes=elasticsearch1
-      - "discovery.zen.ping.unicast.hosts=elasticsearch1,elasticsearch2,elasticsearch3,elasticsearch4,elasticsearch5,elasticsearch6"
+      - cluster.initial_master_nodes=elasticsearch
+      - "discovery.zen.ping.unicast.hosts=elasticsearch,elasticsearch2,elasticsearch3,elasticsearch4,elasticsearch5,elasticsearch6"
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms256M -Xmx256M"
       - http.cors.enabled=true
@@ -74,10 +74,10 @@ services:
       - node.data=false
       - node.ingest=false
       - cluster.name=docker-cluster
-      - cluster.initial_master_nodes=elasticsearch1
+      - cluster.initial_master_nodes=elasticsearch
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms256M -Xmx256M"
-      - "discovery.zen.ping.unicast.hosts=elasticsearch1,elasticsearch2,elasticsearch3,elasticsearch4,elasticsearch5,elasticsearch6"
+      - "discovery.zen.ping.unicast.hosts=elasticsearch,elasticsearch2,elasticsearch3,elasticsearch4,elasticsearch5,elasticsearch6"
       - http.cors.enabled=true
       - http.cors.allow-origin=*
       - network.host=_eth0_
@@ -119,10 +119,10 @@ services:
       - node.data=false
       - node.ingest=true
       - cluster.name=docker-cluster
-      - cluster.initial_master_nodes=elasticsearch1
+      - cluster.initial_master_nodes=elasticsearch
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms256M -Xmx256M"
-      - "discovery.zen.ping.unicast.hosts=elasticsearch1,elasticsearch2,elasticsearch3,elasticsearch4,elasticsearch5,elasticsearch6"
+      - "discovery.zen.ping.unicast.hosts=elasticsearch,elasticsearch2,elasticsearch3,elasticsearch4,elasticsearch5,elasticsearch6"
       - http.cors.enabled=true
       - http.cors.allow-origin=*
       - network.host=_eth0_
@@ -166,10 +166,10 @@ services:
       - node.data=false
       - node.ingest=true
       - cluster.name=docker-cluster
-      - cluster.initial_master_nodes=elasticsearch1
+      - cluster.initial_master_nodes=elasticsearch
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms256M -Xmx256M"
-      - "discovery.zen.ping.unicast.hosts=elasticsearch1,elasticsearch2,elasticsearch3,elasticsearch4,elasticsearch5,elasticsearch6"
+      - "discovery.zen.ping.unicast.hosts=elasticsearch,elasticsearch2,elasticsearch3,elasticsearch4,elasticsearch5,elasticsearch6"
       - http.cors.enabled=true
       - http.cors.allow-origin=*
       - network.host=_eth0_
@@ -212,10 +212,10 @@ services:
       - node.data=true
       - node.ingest=false
       - cluster.name=docker-cluster
-      - cluster.initial_master_nodes=elasticsearch1
+      - cluster.initial_master_nodes=elasticsearch
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms256M -Xmx256M"
-      - "discovery.zen.ping.unicast.hosts=elasticsearch1,elasticsearch2,elasticsearch3,elasticsearch4,elasticsearch5,elasticsearch6"
+      - "discovery.zen.ping.unicast.hosts=elasticsearch,elasticsearch2,elasticsearch3,elasticsearch4,elasticsearch5,elasticsearch6"
       - http.cors.enabled=true
       - http.cors.allow-origin=*
       - network.host=_eth0_
@@ -264,10 +264,10 @@ services:
       - node.data=true
       - node.ingest=false
       - cluster.name=docker-cluster
-      - cluster.initial_master_nodes=elasticsearch1
+      - cluster.initial_master_nodes=elasticsearch
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms256M -Xmx256M"
-      - "discovery.zen.ping.unicast.hosts=elasticsearch1,elasticsearch2,elasticsearch3,elasticsearch4,elasticsearch5,elasticsearch6"
+      - "discovery.zen.ping.unicast.hosts=elasticsearch,elasticsearch2,elasticsearch3,elasticsearch4,elasticsearch5,elasticsearch6"
       - http.cors.enabled=true
       - http.cors.allow-origin=*
       - network.host=_eth0_
@@ -312,7 +312,7 @@ services:
     container_name: kibana
     environment:
       SERVER_NAME: localhost
-      ELASTICSEARCH_URL: http://elasticsearch1:9200/
+      ELASTICSEARCH_URL: http://elasticsearch:9200/
     ports:
       - 5601:5601
     volumes:
@@ -356,7 +356,7 @@ networks:
 
 curl http://localhost:9200/_cluster/health?pretty
 curl http://localhost:9200/_nodes/
-curl http://localhost:9200/_nodes/elasticsearch1
+curl http://localhost:9200/_nodes/elasticsearch
 
 
 root@ip-172-31-22-182:/home/ubuntu# curl http://localhost:9200/_cluster/health?pretty
