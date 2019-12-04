@@ -1,0 +1,44 @@
+ref: 
+https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-node.html
+https://github.com/maxyermayank/docker-compose-elasticsearch-kibana/blob/master/docker-compose.yml
+https://medium.com/@JinnaBalu/elasticsearch-on-docker-b7854f116062
+
+sysctl -w vm.max_map_count=262144
+
+Check cluster health
+We've exposed port 9200 on one of those containers, allowing us to query the cluster health with the following request:
+curl http://localhost:9200/_cluster/health?pretty
+curl http://localhost:9200/_nodes/
+curl http://localhost:9200/_nodes/elasticsearch1
+
+-------------------------------------------------master-node: 
+node.master: true
+node.data: false
+node.ingest: false
+
+data-node: 
+node.master: false
+node.data: true
+node.ingest: false
+
+ingest-node: 
+node.master: false
+node.data: false
+node.ingest: true 
+
+
+co-ordinating-node: 
+node.master: false
+node.data: false
+node.ingest: false
+
+-------------------------------------------------
+docker volume ls
+docker volume rm elk-720_esdata6 
+
+#to delete all volumes which are unused 
+docker volume prune 
+
+
+
+
